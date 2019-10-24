@@ -97,7 +97,7 @@ CMD ["app.py"]
 
 To build the container you need
 ```sh
-docker build -t ecs-lab/web .
+docker build -t ecs-lab-web .
 ```
 
 This should output steps that look something like this:
@@ -117,7 +117,7 @@ docker images | grep ecs-lab
 ```
 To run your container:
 ```sh
-docker run -d -p 3000:3000 ecs-lab/web
+docker run -d -p 3000:3000 ecs-lab-web
 ```
 This command runs the image in daemon mode and maps the docker container port 3000 with the host (in this case our workstation) port 3000. We're doing this so that we can run both microservices on a single host without port conflicts.
 
@@ -128,7 +128,7 @@ docker ps
 This should return a list of all the currently running containers. In this example, it should just return a single container, the one that we just started:
 ```
 CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS                    NAMES
-7b0d04f4502c        ecs-lab/web         "python app.py"     9 seconds ago       Up 9 seconds        0.0.0.0:3000->3000/tcp   eloquent_noether
+7b0d04f4502c        ecs-lab-web         "python app.py"     9 seconds ago       Up 9 seconds        0.0.0.0:3000->3000/tcp   eloquent_noether
 ```
 
 To test the actual container output:
@@ -183,8 +183,8 @@ This should return:
 Repeat the same steps with the api microservice. Change directory to /api and repeat the same steps above
 ```sh
 cd ../api 
-docker build -t ecs-lab/api .
-docker run -d -p 8000:8000 ecs-lab/api
+docker build -t ecs-lab-api .
+docker run -d -p 8000:8000 ecs-lab-api
 curl localhost:8000/api
 ```
 The API container should return:
