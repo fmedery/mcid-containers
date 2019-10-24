@@ -54,19 +54,53 @@ tar: Ignoring unknown extended header keyword `SCHILY.nlink'
 ```
 These are entirely innocuous and can be ignored.
 
-Our first step is to build and test our containers locally. If you've never worked with Docker before, there are a few basic commands that we'll use in this workshop, but you can find a more thorough list in the Docker "Getting Started" documentation.
+Our first step is to build and test our containers locally. If you've never worked with Docker before, there are a few basic commands that we'll use in this workshop, but you can find a more thorough list in the [Docker "Getting Started"](https://docs.docker.com/get-started/) documentation.
 To build your first container, go to the web directory. This folder contains our web Python Flask microservice:
 
 ```sh
 cd aws-microservices-ecs-bootcamp-v2/web
 ```
 
-To build the container
+Let's have a look at the `Dockerfile`:
+```sh
+cat  Dockerfile
+```
+```Dockerfile
+#   Copyright 2017 Amazon.com, Inc. or its affiliates.
+#
+#   Licensed under the Apache License, Version 2.0 (the "License");
+#   you may not use this file except in compliance with the License.
+#   You may obtain a copy of the License at
+#
+#       http://www.apache.org/licenses/LICENSE-2.0
+#
+#   Unless required by applicable law or agreed to in writing, software
+#   distributed under the License is distributed on an "AS IS" BASIS,
+#   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#   See the License for the specific language governing permissions and
+#   limitations under the License.
+
+FROM ubuntu:latest
+MAINTAINER widha@amazon.com
+RUN apt-get update -y && apt-get install -y apt-transport-https curl ca-certificates wget unzip python-pip python-dev build-essential && apt-get clean && apt-get autoremove && rm -rf /var/lib/apt/lists/*
+RUN wget https://s3.dualstack.us-east-2.amazonaws.com/aws-xray-assets.us-east-2/xray-daemon/aws-xray-daemon-linux-2.x.zip && unzip aws-xray-daemon-linux-2.x.zip && cp ./xray /usr/bin/xray
+COPY . /app
+WORKDIR /app
+RUN pip install -r requirements.txt
+ENTRYPOINT ["python"]
+
+EXPOSE 3000
+
+CMD ["xray", "--log-file /var/log/xray-daemon.log"] &
+CMD ["app.py"]
+```
+
+To build the container you need
 ```sh
 docker build -t ecs-lab/web .
 ```
 
-*This should output steps that look something like this:
+This should output steps that look something like this:
 ```
 Sending build context to Docker daemon 4.096 kB
 Sending build context to Docker daemon 
