@@ -15,19 +15,21 @@ __Verify that the region is us-west-2 (OREGON)__
 ![lab_region](/assets/lab_region.png)
 
 ## Login to AWS Workshop Portal (at an AWS Event)
-
 Connect to the portal by clicking the button or browsing to https://dashboard.eventengine.run/
 
 You will need the Participant Hash provided upon entry, and your email address to track your unique session.
 
-Once you have completed the step above, you can head straight to Create a Workspace
+Once you have completed the step above, you can head straight to Create a Workspace.
 
 ## Create a Cloud9 Workspace
-In the AWS console go to the Cloud9 service and click create environment
+In the AWS console go to the `Cloud9` service
 
+![cloud9_service](/assets/services_cloud9.png)
+
+Click `Create environment`
+![cloud9_welcome](/assets/cloud9_welcome.png)
 Use `ecs-lab1` as the environment name and Click Next step until you can click `Create Environment`.
 
-![create_cloud9](/assets/services_cloud9.png)
 
 From the Cloud9 workspace, expand the terminal by clicking window icon.
 
