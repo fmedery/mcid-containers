@@ -15,7 +15,7 @@ __Verify that the region is us-west-2 (OREGON)__
 ![lab_region](/assets/lab_region.png)
 
 ## Login to AWS Workshop Portal (at an AWS Event)
-Connect to the portal by clicking the button or browsing to https://dashboard.eventengine.run/
+Connect to the portal by using CTRL+click or CMD+click the button or browsing to https://dashboard.eventengine.run/ in another tab.
 
 You will need the Participant Hash provided upon entry, and your email address to track your unique session.
 
